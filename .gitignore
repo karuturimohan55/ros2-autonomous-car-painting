@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local environments and secrets
+.env
+.env.*
+*credentials*
+*secrets*
+*token*
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Generated ROS 2 and build outputs
+build/
+install/
+log/
+logs/
+*.egg-info/
+
+# Temporary files and local backups
+*.tmp
+*.bak
+*.backup*
+*.pre_timeout*
+*.pre_trim_test*

@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Mobile Base Macro -->
+  <xacro:macro name="mobile_base">
+
+    <!-- Base Footprint (Ground projection) -->
+    <link name="base_footprint"/>
+
+    <joint name="base_footprint_joint" type="fixed">
+      <parent link="base_footprint"/>
+      <child link="base_link"/>
+      <origin xyz="0 0 0.10" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Main Chassis Link -->
+    <link name="base_link">
+      <inertial>
+        <origin xyz="0 0 0.04" rpy="0 0 0"/>
+        <mass value="50.0"/>
+        <inertia ixx="1.635" ixy="0.0" ixz="0.0" iyy="3.510" iyz="0.0" izz="4.875"/>
+      </inertial>
+
+      <!-- Chassis Body -->
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.90 0.60 0.18"/>
+        </geometry>
+        <material name="chassis_dark_gray"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.90 0.60 0.18"/>
+        </geometry>
+      </collision>
+
+      <!-- Protective Bumper Trim -->
+      <visual>
+        <origin xyz="0.44 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.04 0.58 0.12"/>
+        </geometry>
+        <material name="industrial_orange"/>
+      </visual>
+      <visual>
+        <origin xyz="-0.44 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.04 0.58 0.12"/>
+        </geometry>
+        <material name="industrial_orange"/>
+      </visual>
+
+      <!-- Arm Mounting Pedestal Support Platform -->
+      <visual>
+        <origin xyz="0 0 0.21" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.16" length="0.14"/>
+        </geometry>
+        <material name="joint_dark"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.21" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.16" length="0.14"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Wheel Macro -->
+    <xacro:macro name="wheel" params="prefix x_reflect y_reflect">
+      <link name="${prefix}_wheel_link">
+        <inertial>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <mass value="2.5"/>
+          <inertia ixx="0.007" ixy="0.0" ixz="0.0" iyy="0.0125" iyz="0.0" izz="0.007"/>
+        </inertial>
+        <visual>
+          <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+          <geometry>
+            <cylinder radius="0.10" length="0.06"/>
+          </geometry>
+          <material name="rubber_black"/>
+        </visual>
+        <visual>
+          <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+          <geometry>
+            <cylinder radius="0.06" length="0.062"/>
+          </geometry>
+          <material name="metallic_silver"/>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+          <geometry>
+            <cylinder radius="0.10" length="0.06"/>
+          </geometry>
+        </collision>
+      </link>
+
+      <joint name="${prefix}_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="${prefix}_wheel_link"/>
+        <origin xyz="${x_reflect * 0.28} ${y_reflect * 0.33} 0.0" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <dynamics damping="0.1" friction="0.1"/>
+      </joint>
+
+      <gazebo reference="${prefix}_wheel_link">
+        <mu1>1.0</mu1>
+        <mu2>0.1</mu2>
+        <fdir1>1 0 0</fdir1>
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <minDepth>0.001</minDepth>
+        <material>Gazebo/FlatBlack</material>
+      </gazebo>
+    </xacro:macro>
+
+    <!-- Instantiate 4 Wheels -->
+    <xacro:wheel prefix="front_left"  x_reflect="1"  y_reflect="1"/>
+    <xacro:wheel prefix="front_right" x_reflect="1"  y_reflect="-1"/>
+    <xacro:wheel prefix="rear_left"   x_reflect="-1" y_reflect="1"/>
+    <xacro:wheel prefix="rear_right"  x_reflect="-1" y_reflect="-1"/>
+
+    <gazebo reference="base_link">
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

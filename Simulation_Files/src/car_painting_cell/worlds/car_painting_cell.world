@@ -1,0 +1,234 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="car_painting_cell_world">
+
+    <!-- ==================== SCENE & LIGHTING ==================== -->
+    <scene>
+      <ambient>0.60 0.62 0.66 1.0</ambient>
+      <background>0.18 0.20 0.24 1.0</background>
+      <shadows>true</shadows>
+      <grid>false</grid>
+    </scene>
+
+    <!-- Sun light -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Fallback ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Overhead Industrial Inspection Lighting Banks (shadow-free illumination) -->
+    <light name="overhead_light_front" type="point">
+      <pose>2.0 0 3.8 0 0 0</pose>
+      <diffuse>0.85 0.88 0.92 1.0</diffuse>
+      <specular>0.4 0.4 0.4 1.0</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.4</constant>
+        <linear>0.04</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="overhead_light_rear" type="point">
+      <pose>-2.0 0 3.8 0 0 0</pose>
+      <diffuse>0.85 0.88 0.92 1.0</diffuse>
+      <specular>0.4 0.4 0.4 1.0</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.4</constant>
+        <linear>0.04</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="overhead_light_left" type="point">
+      <pose>0 2.2 3.8 0 0 0</pose>
+      <diffuse>0.85 0.88 0.92 1.0</diffuse>
+      <specular>0.4 0.4 0.4 1.0</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.4</constant>
+        <linear>0.04</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="overhead_light_right" type="point">
+      <pose>0 -2.2 3.8 0 0 0</pose>
+      <diffuse>0.85 0.88 0.92 1.0</diffuse>
+      <specular>0.4 0.4 0.4 1.0</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.4</constant>
+        <linear>0.04</linear>
+        <quadratic>0.002</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <!-- ==================== PAINTING CELL WORKSHOP ==================== -->
+    <include>
+      <name>painting_cell</name>
+      <uri>model://painting_cell</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- ==================== STATIONARY CAR BODY ==================== -->
+    <!-- Target Dimensions: 4.80m length x 1.90m width x 1.60m height -->
+    <include>
+      <name>car_body</name>
+      <uri>model://car_body</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- ==================== INDUSTRIAL CELL CAMERAS ==================== -->
+    <!-- 1. Corner Isometric Surveillance Camera (Rear-Left View) -->
+    <model name="cell_monitoring_camera">
+      <static>true</static>
+      <pose>-5.8 -4.0 3.6 0 0.38 0.60</pose>
+      <link name="camera_link">
+        <visual name="camera_housing_visual">
+          <geometry>
+            <box>
+              <size>0.20 0.12 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1.0</ambient>
+            <diffuse>0.3 0.3 0.3 1.0</diffuse>
+          </material>
+        </visual>
+        <sensor name="overview_camera_sensor" type="camera">
+          <update_rate>15.0</update_rate>
+          <camera name="cell_overview">
+            <horizontal_fov>1.18</horizontal_fov>
+            <image>
+              <width>1280</width>
+              <height>720</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+          </camera>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <ros>
+              <namespace>/cell_camera</namespace>
+            </ros>
+            <camera_name>overview</camera_name>
+            <frame_name>camera_optical_frame</frame_name>
+          </plugin>
+        </sensor>
+      </link>
+    </model>
+
+    <!-- 2. Front-Right Inspection Camera (Front-3/4 View) -->
+    <model name="cell_front_camera">
+      <static>true</static>
+      <pose>5.8 -4.0 3.6 0 0.38 2.537</pose>
+      <link name="front_camera_link">
+        <visual name="front_housing_visual">
+          <geometry>
+            <box>
+              <size>0.20 0.12 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1.0</ambient>
+            <diffuse>0.3 0.3 0.3 1.0</diffuse>
+          </material>
+        </visual>
+        <sensor name="front_camera_sensor" type="camera">
+          <update_rate>15.0</update_rate>
+          <camera name="cell_front">
+            <horizontal_fov>1.18</horizontal_fov>
+            <image>
+              <width>1280</width>
+              <height>720</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+          </camera>
+          <plugin name="front_camera_controller" filename="libgazebo_ros_camera.so">
+            <ros>
+              <namespace>/cell_camera</namespace>
+            </ros>
+            <camera_name>front</camera_name>
+            <frame_name>front_camera_optical_frame</frame_name>
+          </plugin>
+        </sensor>
+      </link>
+    </model>
+
+    <!-- 3. Top-Down Layout Camera (Plan View) -->
+    <model name="cell_top_camera">
+      <static>true</static>
+      <pose>0 0 7.5 0 1.570796 0</pose>
+      <link name="top_camera_link">
+        <sensor name="top_camera_sensor" type="camera">
+          <update_rate>15.0</update_rate>
+          <camera name="cell_top">
+            <horizontal_fov>1.65</horizontal_fov>
+            <image>
+              <width>1280</width>
+              <height>720</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+          </camera>
+          <plugin name="top_camera_controller" filename="libgazebo_ros_camera.so">
+            <ros>
+              <namespace>/cell_camera</namespace>
+            </ros>
+            <camera_name>top</camera_name>
+            <frame_name>top_camera_optical_frame</frame_name>
+          </plugin>
+        </sensor>
+      </link>
+    </model>
+
+    <!-- ==================== PHYSICS CONFIGURATION ==================== -->
+    <physics type="ode">
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1.3</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>100.0</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+    </physics>
+
+    <!-- ==================== INITIAL CAMERA PERSPECTIVE ==================== -->
+    <!-- Elevated isometric 3/4 view capturing entire cell, car, and markings -->
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>-6.8 -5.8 4.2 0 0.42 0.72</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>

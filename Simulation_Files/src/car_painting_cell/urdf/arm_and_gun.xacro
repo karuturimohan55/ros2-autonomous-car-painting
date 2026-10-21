@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Articulated 6-Axis Arm and Spray Gun End-Effector Macro -->
+  <xacro:macro name="painting_arm">
+
+    <!-- ==================== JOINT 1: ARM BASE (WAIST PAN) ==================== -->
+    <link name="arm_base_link">
+      <inertial>
+        <origin xyz="0 0 0.06" rpy="0 0 0"/>
+        <mass value="5.0"/>
+        <inertia ixx="0.04" ixy="0.0" ixz="0.0" iyy="0.04" iyz="0.0" izz="0.05"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0.06" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.12" length="0.12"/>
+        </geometry>
+        <material name="industrial_orange"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.06" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.12" length="0.12"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="arm_base_joint" type="revolute">
+      <parent link="base_link"/>
+      <child link="arm_base_link"/>
+      <origin xyz="0 0 0.28" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-3.14159" upper="3.14159" effort="150.0" velocity="2.0"/>
+      <dynamics damping="5.0" friction="2.0"/>
+    </joint>
+
+    <!-- ==================== JOINT 2: SHOULDER (PITCH) ==================== -->
+    <link name="upper_arm_link">
+      <inertial>
+        <origin xyz="0 0 0.35" rpy="0 0 0"/>
+        <mass value="3.2"/>
+        <inertia ixx="0.12" ixy="0.0" ixz="0.0" iyy="0.12" iyz="0.0" izz="0.015"/>
+      </inertial>
+      <!-- Shoulder Pivot Knuckle -->
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="0.09" length="0.16"/>
+        </geometry>
+        <material name="joint_dark"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="0.09" length="0.16"/>
+        </geometry>
+      </collision>
+      <!-- Arm Cylinder -->
+      <visual>
+        <origin xyz="0 0 0.35" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.065" length="0.70"/>
+        </geometry>
+        <material name="arm_light_gray"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.35" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.065" length="0.70"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="shoulder_joint" type="revolute">
+      <parent link="arm_base_link"/>
+      <child link="upper_arm_link"/>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="-1.80" upper="1.80" effort="200.0" velocity="1.8"/>
+      <dynamics damping="25.0" friction="18.0"/>
+    </joint>
+
+    <!-- ==================== JOINT 3: ELBOW (PITCH) ==================== -->
+    <link name="forearm_link">
+      <inertial>
+        <origin xyz="0 0 0.325" rpy="0 0 0"/>
+        <mass value="2.0"/>
+        <inertia ixx="0.06" ixy="0.0" ixz="0.0" iyy="0.06" iyz="0.0" izz="0.008"/>
+      </inertial>
+      <!-- Elbow Knuckle -->
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="0.075" length="0.14"/>
+        </geometry>
+        <material name="joint_dark"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="0.075" length="0.14"/>
+        </geometry>
+      </collision>
+      <!-- Forearm Tube -->
+      <visual>
+        <origin xyz="0 0 0.325" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.055" length="0.65"/>
+        </geometry>
+        <material name="arm_light_gray"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.325" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.055" length="0.65"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="elbow_joint" type="revolute">
+      <parent link="upper_arm_link"/>
+      <child link="forearm_link"/>
+      <origin xyz="0 0 0.70" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="-2.50" upper="2.50" effort="150.0" velocity="2.0"/>
+      <dynamics damping="20.0" friction="14.0"/>
+    </joint>
+
+    <!-- ==================== JOINT 4: WRIST 1 (ROLL / YAW) ==================== -->
+    <link name="wrist_1_link">
+      <inertial>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.004"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.048" length="0.10"/>
+        </geometry>
+        <material name="industrial_orange"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.048" length="0.10"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="wrist_1_joint" type="revolute">
+      <parent link="forearm_link"/>
+      <child link="wrist_1_link"/>
+      <origin xyz="0 0 0.65" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-3.14159" upper="3.14159" effort="50.0" velocity="2.5"/>
+      <dynamics damping="5.0" friction="2.0"/>
+    </joint>
+
+    <!-- ==================== JOINT 5: WRIST 2 (BEND / PITCH) ==================== -->
+    <link name="wrist_2_link">
+      <inertial>
+        <origin xyz="0 0 0.045" rpy="0 0 0"/>
+        <mass value="0.8"/>
+        <inertia ixx="0.003" ixy="0.0" ixz="0.0" iyy="0.003" iyz="0.0" izz="0.002"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0.045" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="0.042" length="0.09"/>
+        </geometry>
+        <material name="joint_dark"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.045" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="0.042" length="0.09"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="wrist_2_joint" type="revolute">
+      <parent link="wrist_1_link"/>
+      <child link="wrist_2_link"/>
+      <origin xyz="0 0 0.10" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="-2.00" upper="2.00" effort="40.0" velocity="2.5"/>
+      <dynamics damping="10.0" friction="6.0"/>
+    </joint>
+
+    <!-- ==================== JOINT 6: WRIST 3 (TOOL FLANGE ROLL) ==================== -->
+    <link name="tool_flange_link">
+      <inertial>
+        <origin xyz="0 0 0.01" rpy="0 0 0"/>
+        <mass value="0.4"/>
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0.01" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.040" length="0.02"/>
+        </geometry>
+        <material name="metallic_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.01" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.040" length="0.02"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="wrist_3_joint" type="revolute">
+      <parent link="wrist_2_link"/>
+      <child link="tool_flange_link"/>
+      <origin xyz="0 0 0.09" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-3.14159" upper="3.14159" effort="30.0" velocity="3.0"/>
+      <dynamics damping="3.0" friction="1.5"/>
+    </joint>
+
+    <!-- ==================== END-EFFECTOR: SPRAY GUN ASSEMBLY ==================== -->
+    <!-- Modular spray gun assembly bolted to the tool flange -->
+    <link name="spray_gun_link">
+      <inertial>
+        <origin xyz="0 0 0.07" rpy="0 0 0"/>
+        <mass value="0.6"/>
+        <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.002" iyz="0.0" izz="0.001"/>
+      </inertial>
+      <!-- Gun Body Cylinder -->
+      <visual>
+        <origin xyz="0 0 0.07" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.025" length="0.14"/>
+        </geometry>
+        <material name="metallic_silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.07" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.025" length="0.14"/>
+        </geometry>
+      </collision>
+      <!-- Fluid Paint Canister / Hose Manifold -->
+      <visual>
+        <origin xyz="0 0.05 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.03" length="0.10"/>
+        </geometry>
+        <material name="chassis_dark_gray"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0.05 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.03" length="0.10"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="spray_gun_joint" type="fixed">
+      <parent link="tool_flange_link"/>
+      <child link="spray_gun_link"/>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+    </joint>
+
+    <!-- ==================== SPRAY NOZZLE ==================== -->
+    <link name="nozzle_link">
+      <inertial>
+        <origin xyz="0 0 0.02" rpy="0 0 0"/>
+        <mass value="0.15"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
+      <!-- Precision Brass Atomizer Nozzle Tip -->
+      <visual>
+        <origin xyz="0 0 0.02" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.012" length="0.04"/>
+        </geometry>
+        <material name="nozzle_gold"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.02" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.012" length="0.04"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="nozzle_joint" type="fixed">
+      <parent link="spray_gun_link"/>
+      <child link="nozzle_link"/>
+      <origin xyz="0 0 0.14" rpy="0 0 0"/>
+    </joint>
+
+    <!-- ==================== SPRAY PATTERN / CONE (VISUAL ONLY) ==================== -->
+    <!-- Visual atomized spray cone indicating paint application direction -->
+    <link name="spray_cone_link">
+      <inertial>
+        <origin xyz="0 0 0.18" rpy="0 0 0"/>
+        <mass value="0.001"/>
+        <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0.18" rpy="0 0 0"/>
+        <geometry>
+          <!-- Expanding spray cone representation: length 0.36m, radius 0.14m -->
+          <cylinder radius="0.12" length="0.36"/>
+        </geometry>
+        <material name="spray_cone_cyan"/>
+      </visual>
+    </link>
+
+    <joint name="spray_cone_joint" type="prismatic">
+      <parent link="nozzle_link"/>
+      <child link="spray_cone_link"/>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit lower="-1.5" upper="0.05" effort="10.0" velocity="5.0"/>
+      <dynamics damping="0.01" friction="0.0"/>
+    </joint>
+
+    <!-- Gazebo Material Colors for Arm Links -->
+    <gazebo reference="arm_base_link">
+      <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="upper_arm_link">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="forearm_link">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="wrist_1_link">
+      <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="wrist_2_link">
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+    <gazebo reference="tool_flange_link">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="spray_gun_link">
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="nozzle_link">
+      <material>Gazebo/Gold</material>
+    </gazebo>
+    <gazebo reference="spray_cone_link">
+      <material>Gazebo/BlueTransparent</material>
+      <gravity>false</gravity>
+    </gazebo>
+
+    <!-- Implicit Spring Damper for Joint Holding Stability -->
+    <gazebo reference="arm_base_joint">
+      <implicitSpringDamper>true</implicitSpringDamper>
+    </gazebo>
+    <gazebo reference="shoulder_joint">
+      <implicitSpringDamper>true</implicitSpringDamper>
+    </gazebo>
+    <gazebo reference="elbow_joint">
+      <implicitSpringDamper>true</implicitSpringDamper>
+    </gazebo>
+    <gazebo reference="wrist_1_joint">
+      <implicitSpringDamper>true</implicitSpringDamper>
+    </gazebo>
+    <gazebo reference="wrist_2_joint">
+      <implicitSpringDamper>true</implicitSpringDamper>
+    </gazebo>
+    <gazebo reference="wrist_3_joint">
+      <implicitSpringDamper>true</implicitSpringDamper>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,503 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="car_body">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="chassis_link">
+      <inertial>
+        <pose>0 0 0.7 0 0 0</pose>
+        <mass>1500.0</mass>
+        <inertia>
+          <ixx>800.0</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>2500.0</iyy>
+          <iyz>0.0</iyz>
+          <izz>2800.0</izz>
+        </inertia>
+      </inertial>
+
+      <!-- ==================== MAIN CHASSIS / LOWER BODY ==================== -->
+      <!-- Dimensions: Length=4.80m, Width=1.80m, Height=0.47m (z: 0.25m to 0.72m) -->
+      <visual name="lower_body_visual">
+        <pose>0 0 0.485 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>4.80 1.80 0.47</size>
+          </box>
+        </geometry>
+        <material>
+          <!-- Industrial primer / metallic silver e-coat ready for painting -->
+          <ambient>0.62 0.65 0.68 1.0</ambient>
+          <diffuse>0.74 0.77 0.80 1.0</diffuse>
+          <specular>0.5 0.5 0.52 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="lower_body_collision">
+        <pose>0 0 0.485 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>4.80 1.80 0.47</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- ==================== FRONT HOOD ==================== -->
+      <visual name="hood_visual">
+        <pose>1.69 0 0.755 0 0.02 0</pose>
+        <geometry>
+          <box>
+            <size>1.38 1.70 0.07</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.65 0.68 0.71 1.0</ambient>
+          <diffuse>0.76 0.79 0.82 1.0</diffuse>
+          <specular>0.55 0.55 0.58 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="hood_collision">
+        <pose>1.69 0 0.755 0 0.02 0</pose>
+        <geometry>
+          <box>
+            <size>1.38 1.70 0.07</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- ==================== FRONT BUMPER & GRILLE ==================== -->
+      <visual name="front_bumper_visual">
+        <pose>2.38 0 0.36 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.10 1.84 0.24</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.58 0.60 0.63 1.0</ambient>
+          <diffuse>0.68 0.70 0.74 1.0</diffuse>
+          <specular>0.4 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="front_grille_visual">
+        <pose>2.405 0 0.44 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.02 1.20 0.20</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1.0</ambient>
+          <diffuse>0.20 0.20 0.20 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- ==================== HEADLIGHTS ==================== -->
+      <visual name="headlight_left_visual">
+        <pose>2.39 0.68 0.64 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 0.34 0.12</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.92 0.98 1.0</ambient>
+          <diffuse>0.92 0.96 1.00 1.0</diffuse>
+          <emissive>0.35 0.40 0.45 1.0</emissive>
+        </material>
+      </visual>
+
+      <visual name="headlight_right_visual">
+        <pose>2.39 -0.68 0.64 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 0.34 0.12</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.92 0.98 1.0</ambient>
+          <diffuse>0.92 0.96 1.00 1.0</diffuse>
+          <emissive>0.35 0.40 0.45 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- ==================== REAR TRUNK ==================== -->
+      <visual name="trunk_visual">
+        <pose>-1.71 0 0.765 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.34 1.70 0.09</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.65 0.68 0.71 1.0</ambient>
+          <diffuse>0.76 0.79 0.82 1.0</diffuse>
+          <specular>0.55 0.55 0.58 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="trunk_collision">
+        <pose>-1.71 0 0.765 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.34 1.70 0.09</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- ==================== REAR BUMPER & TAILLIGHTS ==================== -->
+      <visual name="rear_bumper_visual">
+        <pose>-2.38 0 0.36 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.10 1.84 0.24</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.58 0.60 0.63 1.0</ambient>
+          <diffuse>0.68 0.70 0.74 1.0</diffuse>
+          <specular>0.4 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="taillight_left_visual">
+        <pose>-2.39 0.68 0.66 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 0.34 0.12</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.70 0.05 0.05 1.0</ambient>
+          <diffuse>0.88 0.10 0.10 1.0</diffuse>
+          <emissive>0.45 0.03 0.03 1.0</emissive>
+        </material>
+      </visual>
+
+      <visual name="taillight_right_visual">
+        <pose>-2.39 -0.68 0.66 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 0.34 0.12</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.70 0.05 0.05 1.0</ambient>
+          <diffuse>0.88 0.10 0.10 1.0</diffuse>
+          <emissive>0.45 0.03 0.03 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- ==================== CABIN STRUCTURE & PILLARS ==================== -->
+      <visual name="cabin_visual">
+        <pose>-0.025 0 1.13 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.05 1.56 0.82</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.62 0.65 0.68 1.0</ambient>
+          <diffuse>0.74 0.77 0.80 1.0</diffuse>
+          <specular>0.5 0.5 0.52 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="cabin_collision">
+        <pose>-0.025 0 1.13 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.05 1.56 0.82</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- ==================== ROOF PANEL ==================== -->
+      <!-- Reaches exact top height: 1.575 + 0.025 = 1.60m -->
+      <visual name="roof_visual">
+        <pose>-0.05 0 1.575 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.10 1.52 0.05</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.65 0.68 0.71 1.0</ambient>
+          <diffuse>0.76 0.79 0.82 1.0</diffuse>
+          <specular>0.55 0.55 0.58 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="roof_collision">
+        <pose>-0.05 0 1.575 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2.10 1.52 0.05</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- ==================== WINDSHIELD (FRONT GLASS) ==================== -->
+      <!-- Connects from hood (x=1.40, z=0.75) up to roof (x=0.95, z=1.55) -->
+      <visual name="windshield_visual">
+        <pose>1.175 0 1.15 0 -0.512 0</pose>
+        <geometry>
+          <box>
+            <size>0.03 1.50 0.92</size>
+          </box>
+        </geometry>
+        <material>
+          <!-- Smoke tinted automotive safety glass -->
+          <ambient>0.12 0.15 0.18 0.90</ambient>
+          <diffuse>0.18 0.22 0.26 0.90</diffuse>
+          <specular>0.9 0.92 0.95 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- ==================== REAR WINDOW (BACK GLASS) ==================== -->
+      <!-- Connects from trunk (x=-1.40, z=0.75) up to roof (x=-0.95, z=1.55) -->
+      <visual name="rear_window_visual">
+        <pose>-1.175 0 1.15 0 0.512 0</pose>
+        <geometry>
+          <box>
+            <size>0.03 1.50 0.92</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.12 0.15 0.18 0.90</ambient>
+          <diffuse>0.18 0.22 0.26 0.90</diffuse>
+          <specular>0.9 0.92 0.95 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- ==================== SIDE WINDOWS ==================== -->
+      <visual name="side_window_left_visual">
+        <pose>-0.025 0.785 1.16 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.92 0.02 0.58</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.12 0.15 0.18 0.90</ambient>
+          <diffuse>0.18 0.22 0.26 0.90</diffuse>
+          <specular>0.9 0.92 0.95 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="side_window_right_visual">
+        <pose>-0.025 -0.785 1.16 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.92 0.02 0.58</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.12 0.15 0.18 0.90</ambient>
+          <diffuse>0.18 0.22 0.26 0.90</diffuse>
+          <specular>0.9 0.92 0.95 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- ==================== SIDE MIRRORS ==================== -->
+      <visual name="mirror_left_visual">
+        <pose>0.92 0.93 0.95 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.14 0.12 0.09</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.2 1.0</ambient>
+          <diffuse>0.3 0.3 0.3 1.0</diffuse>
+          <specular>0.5 0.5 0.5 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="mirror_right_visual">
+        <pose>0.92 -0.93 0.95 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.14 0.12 0.09</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.2 1.0</ambient>
+          <diffuse>0.3 0.3 0.3 1.0</diffuse>
+          <specular>0.5 0.5 0.5 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- ==================== WHEEL 1: FRONT LEFT ==================== -->
+      <!-- Center: (1.40, 0.86, 0.35), Radius=0.35m -> bottom at z=0.00m -->
+      <visual name="tire_fl_visual">
+        <pose>1.40 0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.22</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.12 0.12 0.12 1.0</ambient>
+          <diffuse>0.18 0.18 0.18 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="rim_fl_visual">
+        <pose>1.40 0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.23</radius>
+            <length>0.23</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.52 0.55 1.0</ambient>
+          <diffuse>0.75 0.77 0.80 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="wheel_fl_collision">
+        <pose>1.40 0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.24</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- ==================== WHEEL 2: FRONT RIGHT ==================== -->
+      <visual name="tire_fr_visual">
+        <pose>1.40 -0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.22</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.12 0.12 0.12 1.0</ambient>
+          <diffuse>0.18 0.18 0.18 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="rim_fr_visual">
+        <pose>1.40 -0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.23</radius>
+            <length>0.23</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.52 0.55 1.0</ambient>
+          <diffuse>0.75 0.77 0.80 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="wheel_fr_collision">
+        <pose>1.40 -0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.24</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- ==================== WHEEL 3: REAR LEFT ==================== -->
+      <visual name="tire_rl_visual">
+        <pose>-1.40 0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.22</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.12 0.12 0.12 1.0</ambient>
+          <diffuse>0.18 0.18 0.18 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="rim_rl_visual">
+        <pose>-1.40 0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.23</radius>
+            <length>0.23</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.52 0.55 1.0</ambient>
+          <diffuse>0.75 0.77 0.80 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="wheel_rl_collision">
+        <pose>-1.40 0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.24</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <!-- ==================== WHEEL 4: REAR RIGHT ==================== -->
+      <visual name="tire_rr_visual">
+        <pose>-1.40 -0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.22</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.12 0.12 0.12 1.0</ambient>
+          <diffuse>0.18 0.18 0.18 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="rim_rr_visual">
+        <pose>-1.40 -0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.23</radius>
+            <length>0.23</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.5 0.52 0.55 1.0</ambient>
+          <diffuse>0.75 0.77 0.80 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="wheel_rr_collision">
+        <pose>-1.40 -0.86 0.35 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.35</radius>
+            <length>0.24</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

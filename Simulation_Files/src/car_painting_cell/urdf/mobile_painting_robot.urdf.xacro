@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot name="mobile_painting_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Include modular components -->
+  <xacro:include filename="materials.xacro"/>
+  <xacro:include filename="mobile_base.xacro"/>
+  <xacro:include filename="arm_and_gun.xacro"/>
+  <xacro:include filename="gazebo_plugins.xacro"/>
+
+  <!-- Instantiate Mobile Base -->
+  <xacro:mobile_base/>
+
+  <!-- Instantiate Articulated Arm & Spray Gun -->
+  <xacro:painting_arm/>
+
+  <!-- Instantiate Gazebo Plugins -->
+  <xacro:gazebo_control_plugins/>
+
+</robot>

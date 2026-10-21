@@ -1,0 +1,538 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="painting_cell">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="cell_structure_link">
+      <!-- ==================== INDUSTRIAL EPOXY FLOOR ==================== -->
+      <!-- Dimensions: 15.0m x 11.0m x 0.10m, centered at z = -0.05m -> Top surface is at z = 0.00m -->
+      <visual name="floor_visual">
+        <pose>0 0 -0.05 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>15.0 11.0 0.10</size>
+          </box>
+        </geometry>
+        <material>
+          <!-- Clean industrial light slate epoxy finish -->
+          <ambient>0.78 0.80 0.83 1.0</ambient>
+          <diffuse>0.82 0.85 0.88 1.0</diffuse>
+          <specular>0.35 0.35 0.35 1.0</specular>
+        </material>
+      </visual>
+
+      <collision name="floor_collision">
+        <pose>0 0 -0.05 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>15.0 11.0 0.10</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- ==================== SURROUNDING ENCLOSURE WALLS ==================== -->
+      <!-- Dimensions: Length=14.0m, Width=10.0m, Height=4.20m (z: 0.00m to 4.20m) -->
+
+      <!-- North Wall (+X) -->
+      <visual name="north_wall_visual">
+        <pose>7.0 0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.20 10.20 4.20</size>
+          </box>
+        </geometry>
+        <material>
+          <!-- Cleanroom white / light industrial panel -->
+          <ambient>0.85 0.87 0.90 1.0</ambient>
+          <diffuse>0.88 0.90 0.92 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="north_baseboard_visual">
+        <pose>6.89 0 0.20 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 10.18 0.40</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.25 0.28 0.32 1.0</ambient>
+          <diffuse>0.30 0.33 0.38 1.0</diffuse>
+        </material>
+      </visual>
+
+      <collision name="north_wall_collision">
+        <pose>7.0 0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.20 10.20 4.20</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- South Wall (-X) -->
+      <visual name="south_wall_visual">
+        <pose>-7.0 0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.20 10.20 4.20</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.87 0.90 1.0</ambient>
+          <diffuse>0.88 0.90 0.92 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="south_baseboard_visual">
+        <pose>-6.89 0 0.20 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 10.18 0.40</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.25 0.28 0.32 1.0</ambient>
+          <diffuse>0.30 0.33 0.38 1.0</diffuse>
+        </material>
+      </visual>
+
+      <collision name="south_wall_collision">
+        <pose>-7.0 0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.20 10.20 4.20</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- East Wall (+Y) -->
+      <visual name="east_wall_visual">
+        <pose>0 5.0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>14.20 0.20 4.20</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.87 0.90 1.0</ambient>
+          <diffuse>0.88 0.90 0.92 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="east_baseboard_visual">
+        <pose>0 4.89 0.20 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>14.18 0.04 0.40</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.25 0.28 0.32 1.0</ambient>
+          <diffuse>0.30 0.33 0.38 1.0</diffuse>
+        </material>
+      </visual>
+
+      <collision name="east_wall_collision">
+        <pose>0 5.0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>14.20 0.20 4.20</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- West Wall (-Y) -->
+      <visual name="west_wall_visual">
+        <pose>0 -5.0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>14.20 0.20 4.20</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.85 0.87 0.90 1.0</ambient>
+          <diffuse>0.88 0.90 0.92 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="west_baseboard_visual">
+        <pose>0 -4.89 0.20 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>14.18 0.04 0.40</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.25 0.28 0.32 1.0</ambient>
+          <diffuse>0.30 0.33 0.38 1.0</diffuse>
+        </material>
+      </visual>
+
+      <collision name="west_wall_collision">
+        <pose>0 -5.0 2.10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>14.20 0.20 4.20</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- ==================== VENTILATION & EXHAUST FILTER BANKS ==================== -->
+      <!-- Typical downdraft/crossdraft paint booth ventilation grills at lower wall -->
+      <visual name="vent_north_visual">
+        <pose>6.88 0 1.20 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.02 6.0 1.20</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.22 0.25 1.0</ambient>
+          <diffuse>0.30 0.32 0.35 1.0</diffuse>
+          <specular>0.4 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="vent_south_visual">
+        <pose>-6.88 0 1.20 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.02 6.0 1.20</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.22 0.25 1.0</ambient>
+          <diffuse>0.30 0.32 0.35 1.0</diffuse>
+          <specular>0.4 0.4 0.4 1.0</specular>
+        </material>
+      </visual>
+
+      <!-- ==================== FLOOR MARKING A: VEHICLE STAGING BAY ==================== -->
+      <!-- Yellow perimeter box around stationary car footprint (5.4m x 2.4m) -->
+      <!-- Front marking line -->
+      <visual name="mark_car_front">
+        <pose>2.65 0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.10 2.40 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.90 0.75 0.02 1.0</ambient>
+          <diffuse>0.96 0.82 0.05 1.0</diffuse>
+          <emissive>0.15 0.12 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Rear marking line -->
+      <visual name="mark_car_rear">
+        <pose>-2.65 0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.10 2.40 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.90 0.75 0.02 1.0</ambient>
+          <diffuse>0.96 0.82 0.05 1.0</diffuse>
+          <emissive>0.15 0.12 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Left marking line -->
+      <visual name="mark_car_left">
+        <pose>0 1.20 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>5.40 0.10 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.90 0.75 0.02 1.0</ambient>
+          <diffuse>0.96 0.82 0.05 1.0</diffuse>
+          <emissive>0.15 0.12 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Right marking line -->
+      <visual name="mark_car_right">
+        <pose>0 -1.20 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>5.40 0.10 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.90 0.75 0.02 1.0</ambient>
+          <diffuse>0.96 0.82 0.05 1.0</diffuse>
+          <emissive>0.15 0.12 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Wheel Position Targets (FL, FR, RL, RR) -->
+      <visual name="mark_wheel_fl">
+        <pose>1.40 0.86 0.0025 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.80 0.32 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.30 0.35 0.40 1.0</ambient>
+          <diffuse>0.40 0.45 0.50 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="mark_wheel_fr">
+        <pose>1.40 -0.86 0.0025 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.80 0.32 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.30 0.35 0.40 1.0</ambient>
+          <diffuse>0.40 0.45 0.50 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="mark_wheel_rl">
+        <pose>-1.40 0.86 0.0025 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.80 0.32 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.30 0.35 0.40 1.0</ambient>
+          <diffuse>0.40 0.45 0.50 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="mark_wheel_rr">
+        <pose>-1.40 -0.86 0.0025 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.80 0.32 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.30 0.35 0.40 1.0</ambient>
+          <diffuse>0.40 0.45 0.50 1.0</diffuse>
+        </material>
+      </visual>
+
+      <!-- ==================== FLOOR MARKING B: ROBOT NAVIGATION CORRIDOR ==================== -->
+      <!-- High-visibility cyan navigation loop defining the designated robot travel centerline -->
+      <!-- Standoff distance ~1.2m to 1.5m from car perimeter -->
+
+      <!-- Front robot track line -->
+      <visual name="robot_track_front">
+        <pose>3.85 0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.10 4.90 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.65 0.85 1.0</ambient>
+          <diffuse>0.0 0.78 0.98 1.0</diffuse>
+          <emissive>0.0 0.18 0.25 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Rear robot track line -->
+      <visual name="robot_track_rear">
+        <pose>-3.85 0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.10 4.90 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.65 0.85 1.0</ambient>
+          <diffuse>0.0 0.78 0.98 1.0</diffuse>
+          <emissive>0.0 0.18 0.25 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Left flank robot track line -->
+      <visual name="robot_track_left">
+        <pose>0 2.45 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>7.80 0.10 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.65 0.85 1.0</ambient>
+          <diffuse>0.0 0.78 0.98 1.0</diffuse>
+          <emissive>0.0 0.18 0.25 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- Right flank robot track line -->
+      <visual name="robot_track_right">
+        <pose>0 -2.45 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>7.80 0.10 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.65 0.85 1.0</ambient>
+          <diffuse>0.0 0.78 0.98 1.0</diffuse>
+          <emissive>0.0 0.18 0.25 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- ==================== FLOOR MARKING C: 4 EXTERIOR PAINTING STATIONS ==================== -->
+      <!-- Visual colored stations indicating where the robot executes painting trajectories -->
+
+      <!-- Station 1: Front Surface Zone (Hood & Front Bumper) -->
+      <visual name="station_front_zone">
+        <pose>3.85 0 0.0015 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.90 2.40 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.45 0.75 0.4</ambient>
+          <diffuse>0.25 0.55 0.85 0.4</diffuse>
+        </material>
+      </visual>
+
+      <!-- Station 2: Left Flank Zone (Doors, Pillars, Left Roof) -->
+      <visual name="station_left_zone">
+        <pose>0 2.45 0.0015 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>4.80 0.80 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.45 0.75 0.4</ambient>
+          <diffuse>0.25 0.55 0.85 0.4</diffuse>
+        </material>
+      </visual>
+
+      <!-- Station 3: Rear Surface Zone (Trunk & Rear Bumper) -->
+      <visual name="station_rear_zone">
+        <pose>-3.85 0 0.0015 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.90 2.40 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.45 0.75 0.4</ambient>
+          <diffuse>0.25 0.55 0.85 0.4</diffuse>
+        </material>
+      </visual>
+
+      <!-- Station 4: Right Flank Zone (Doors, Pillars, Right Roof) -->
+      <visual name="station_right_zone">
+        <pose>0 -2.45 0.0015 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>4.80 0.80 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.45 0.75 0.4</ambient>
+          <diffuse>0.25 0.55 0.85 0.4</diffuse>
+        </material>
+      </visual>
+
+      <!-- ==================== FLOOR MARKING D: OUTER HAZARD PERIMETER ==================== -->
+      <!-- High-contrast perimeter border (11.6m x 8.0m) marking cell clearance buffer -->
+      <visual name="hazard_border_north">
+        <pose>5.80 0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.12 8.0 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.95 0.55 0.02 1.0</ambient>
+          <diffuse>0.98 0.60 0.05 1.0</diffuse>
+          <emissive>0.10 0.05 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <visual name="hazard_border_south">
+        <pose>-5.80 0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.12 8.0 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.95 0.55 0.02 1.0</ambient>
+          <diffuse>0.98 0.60 0.05 1.0</diffuse>
+          <emissive>0.10 0.05 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <visual name="hazard_border_east">
+        <pose>0 4.0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>11.72 0.12 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.95 0.55 0.02 1.0</ambient>
+          <diffuse>0.98 0.60 0.05 1.0</diffuse>
+          <emissive>0.10 0.05 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <visual name="hazard_border_west">
+        <pose>0 -4.0 0.002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>11.72 0.12 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.95 0.55 0.02 1.0</ambient>
+          <diffuse>0.98 0.60 0.05 1.0</diffuse>
+          <emissive>0.10 0.05 0.0 1.0</emissive>
+        </material>
+      </visual>
+
+      <!-- ==================== FLOOR MARKING E: OPERATOR / CONTROL STATION ==================== -->
+      <visual name="operator_station_marking">
+        <pose>-5.0 -4.35 0.0025 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.40 0.90 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <!-- Safety Green indicator -->
+          <ambient>0.10 0.60 0.25 1.0</ambient>
+          <diffuse>0.15 0.72 0.30 1.0</diffuse>
+          <emissive>0.05 0.15 0.05 1.0</emissive>
+        </material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>
